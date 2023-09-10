@@ -2,8 +2,13 @@ const algosdk = require('algosdk');
 const cors = require('cors');
 require('dotenv').config();
 
+// Setup Account
+const MNEMONIC = process.env.MNEMONIC;
 
+const generatedAccount = algosdk.mnemonicToSecretKey(MNEMONIC);
 
+console.log(`My address: ${generatedAccount.addr}`);
+console.log(`My sk: ${generatedAccount.sk}`);
 
 // Setup Algorand client
 const algodToken = {
@@ -20,4 +25,4 @@ const corsOptions = {
     optionsSuccessStatus: 200
 };
 
-module.exports = { algodClient, corsOptions };
+module.exports = { algodClient, corsOptions, generatedAccount };
