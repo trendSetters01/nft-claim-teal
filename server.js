@@ -5,28 +5,15 @@ const path = require('path');
 const algosdk = require('algosdk');
 const app = express();
 const cors = require('cors');
+const { algodClient, corsOptions } = require('./config');
 
 const PORT = process.env.PORT || 3001;
 app.use(express.json());
-const corsOptions = {
-    origin: 'http://localhost:3000',
-    optionsSuccessStatus: 200
-  };
-  
-  app.use(cors(corsOptions));
-  
 
-const PURESTAKE_API_KEY = process.env.PURESTAKE_API_KEY;
+app.use(cors(corsOptions));
+
+
 const MNEMONIC = process.env.MNEMONIC;
-
-
-const baseServer = 'https://testnet-algorand.api.purestake.io/ps2';
-const port1 = '';
-
-const token = {
-    'X-API-key': PURESTAKE_API_KEY,
-};
-let algodClient = new algosdk.Algodv2(token, baseServer, port1);
 
 
 const generatedAccount = algosdk.mnemonicToSecretKey(MNEMONIC);
